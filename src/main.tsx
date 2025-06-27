@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import { FormWithCustomHook } from './02-useEffect/FormWithCustomHook';
+import { MultipleCustomHooks } from './03-examples/MultipleCustomHooks';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -11,6 +11,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <CounterApp /> */}
     {/* <CounterWithCustomHook /> */}
     {/* <SimpleForm /> */}
-    <FormWithCustomHook />
+    {/* <FormWithCustomHook /> */}
+    <MultipleCustomHooks />
   </StrictMode>
 );
