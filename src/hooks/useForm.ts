@@ -12,9 +12,14 @@ export const useForm = <T extends Record<string, any>>(initialForm: T) => {
     });
   };
 
+  const onResetForm = () => {
+    setFormState(initialForm);
+  };
+
   return {
     ...formState,
     formState,
     onInputChange,
+    onResetForm,
   };
 };
