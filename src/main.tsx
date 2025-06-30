@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import { MemoHook } from './06-memos/MemoHook';
+import { CallBackHook } from './06-memos/CallBackHook';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -14,10 +14,10 @@ createRoot(document.getElementById('root')!).render(
     {/* <FormWithCustomHook /> */}
     {/* <MultipleCustomHooks /> */}
     {/* <FocusScreen /> */}
-
     {/* <Layout /> */}
-
     {/* <Memorize /> */}
-    <MemoHook />
+    {/* <MemoHook /> */}
+
+    <CallBackHook />
   </StrictMode>
 );
