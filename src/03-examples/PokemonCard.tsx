@@ -1,3 +1,5 @@
+import { useLayoutEffect, useRef, useState } from 'react';
+
 interface Pokemon {
   name: string;
   id: number;
@@ -5,10 +7,21 @@ interface Pokemon {
 }
 
 export const PokemonCard = ({ id, name, sprites = [] }: Pokemon) => {
-  console.log('sprites', sprites);
+  const h2ref = useRef<HTMLInputElement>(null);
+
+  const [boxSize, setBoxSize] = useState({ width: 0, height: 0 });
+
+  useLayoutEffect(() => {
+    const rect = h2ref.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const { height, width } = rect;
+    setBoxSize({ height, width });
+  }, [name]);
+
   return (
-    <section style={{ height: 200 }}>
-      <h2 className="text-capitalize">
+    <section style={{ height: 200, display: 'flex', flexDirection: 'row' }}>
+      <h2 ref={h2ref} className="text-capitalize">
         {' '}
         {id} - {name}
       </h2>
@@ -18,6 +31,8 @@ export const PokemonCard = ({ id, name, sprites = [] }: Pokemon) => {
           <img key={sprite} src={sprite} alt={name} />
         ))}
       </div>
+
+      <pre>{JSON.stringify(boxSize)}</pre>
     </section>
   );
 };
