@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import { Memorize } from './06-memos/Memorize';
+import { MemoHook } from './06-memos/MemoHook';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -17,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
 
     {/* <Layout /> */}
 
-    <Memorize />
+    {/* <Memorize /> */}
+    <MemoHook />
   </StrictMode>
 );
