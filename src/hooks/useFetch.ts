@@ -10,6 +10,8 @@ interface FetchState<T> {
   };
 }
 
+const localCache: Record<string, any> = {};
+
 export const useFetch = <T = unknown>(url: string) => {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
@@ -32,6 +34,18 @@ export const useFetch = <T = unknown>(url: string) => {
   };
 
   const getFetch = async () => {
+    if (localCache[url]) {
+      console.log('usando cache');
+      setState({
+        data: localCache[url],
+        isLoading: false,
+        hasError: false,
+        error: null,
+      });
+
+      return;
+    }
+
     setLoadingState();
     const resp = await fetch(url);
 
@@ -61,6 +75,9 @@ export const useFetch = <T = unknown>(url: string) => {
       hasError: false,
       error: null,
     });
+
+    //Manejo del cache
+    localCache[url] = data;
 
     console.log({ data });
   };
