@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 
 import './index.css';
 
-import { CallBackHook } from './06-memos/CallBackHook';
+import { Padre } from './07-tarea-memo/Padre';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <Memorize /> */}
     {/* <MemoHook /> */}
 
-    <CallBackHook />
+    {/* <CallBackHook /> */}
+    <Padre />
   </StrictMode>
 );
