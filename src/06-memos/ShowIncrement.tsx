@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface Props {
-  increment: () => void;
+  increment: (value: number) => void;
 }
 
 export const ShowIncrement = React.memo(({ increment }: Props) => {
@@ -9,7 +9,7 @@ export const ShowIncrement = React.memo(({ increment }: Props) => {
   return (
     <button
       onClick={() => {
-        increment();
+        increment(5);
       }}
       className="btn btn-primary"
     >
