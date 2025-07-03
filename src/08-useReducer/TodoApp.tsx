@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import { todoReducer, type TodoAction } from './todoReducer';
 
 import { TodoAdd } from './components/todoAdd';
@@ -11,20 +11,29 @@ export interface Todo {
 }
 
 const initialState: Todo[] = [
-  {
-    id: new Date().getTime(),
-    description: 'Dentist Appoinment',
-    done: false,
-  },
-  {
-    id: new Date().getTime() * 3,
-    description: 'Buy bread',
-    done: false,
-  },
+  // {
+  //   id: new Date().getTime(),
+  //   description: 'Dentist Appoinment',
+  //   done: false,
+  // },
+  // {
+  //   id: new Date().getTime() * 3,
+  //   description: 'Buy bread',
+  //   done: false,
+  // },
 ];
 
+const init = (): Todo[] => {
+  const todosString = localStorage.getItem('todos');
+  return todosString ? JSON.parse(todosString) : [];
+};
+
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
+
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
 
   const handleNewTodo = (todo: Todo) => {
     const action: TodoAction = {
