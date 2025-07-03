@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { todoReducer } from './todoReducer';
+import { todoReducer, type TodoAction } from './todoReducer';
 
 import { TodoAdd } from './components/todoAdd';
 import { TodoList } from './components/todoList';
@@ -26,8 +26,8 @@ const initialState: Todo[] = [
 export const TodoApp = () => {
   const [todos, dispatch] = useReducer(todoReducer, initialState);
 
-  const handleNewTodo = (todo) => {
-    const action = {
+  const handleNewTodo = (todo: Todo) => {
+    const action: TodoAction = {
       type: '[TODO] Add Todo',
       payload: todo,
     };

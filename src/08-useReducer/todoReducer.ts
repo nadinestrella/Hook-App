@@ -1,6 +1,6 @@
 import type { Todo } from './TodoApp';
 
-type TodoAction = { type: '[TODO] Add Todo'; payload: Todo };
+export type TodoAction = { type: '[TODO] Add Todo'; payload: Todo };
 
 export const todoReducer = (
   initialState: Todo[],
