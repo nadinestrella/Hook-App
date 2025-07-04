@@ -1,6 +1,8 @@
 import type { Todo } from './TodoApp';
 
-export type TodoAction = { type: '[TODO] Add Todo'; payload: Todo };
+export type TodoAction =
+  | { type: '[TODO] Add Todo'; payload: Todo }
+  | { type: '[TODO] Remove Todo'; payload: number };
 
 export const todoReducer = (
   initialState: Todo[],
@@ -9,6 +11,9 @@ export const todoReducer = (
   switch (action.type) {
     case '[TODO] Add Todo':
       return [...initialState, action.payload];
+
+    case '[TODO] Remove Todo':
+      return initialState.filter((todo) => todo.id !== action.payload);
 
     default:
       return initialState;
