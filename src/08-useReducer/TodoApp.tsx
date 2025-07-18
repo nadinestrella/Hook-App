@@ -1,8 +1,8 @@
 import { useEffect, useReducer } from 'react';
 import { todoReducer, type TodoAction } from './todoReducer';
 
-import { TodoAdd } from './components/todoAdd';
-import { TodoList } from './components/todoList';
+import { TodoAdd } from './components/TodoAdd';
+import { TodoList } from './components/TodoList';
 
 export interface Todo {
   id: number;
@@ -51,6 +51,14 @@ export const TodoApp = () => {
     });
   };
 
+  const handleOnToggleTodo = (id: number) => {
+    dispatch({
+      type: '[TODO] Toggle Todo',
+      payload: id,
+    });
+    console.log({ id });
+  };
+
   return (
     <>
       <h1>
@@ -61,7 +69,11 @@ export const TodoApp = () => {
 
       <div className="row">
         <div className="col-7">
-          <TodoList todos={todos} onDeleteTodo={handleDeleteTodo} />
+          <TodoList
+            todos={todos}
+            onDeleteTodo={handleDeleteTodo}
+            onToggleTodo={handleOnToggleTodo}
+          />
         </div>
         <div className="col-5">
           <h4>Agregar TODO</h4>
