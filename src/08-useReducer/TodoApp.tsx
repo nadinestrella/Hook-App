@@ -1,8 +1,6 @@
-import { useEffect, useReducer } from 'react';
-import { todoReducer, type TodoAction } from './todoReducer';
-
 import { TodoAdd } from './components/TodoAdd';
 import { TodoList } from './components/TodoList';
+import { useTodos } from '../hooks/useTodos';
 
 export interface Todo {
   id: number;
@@ -10,59 +8,27 @@ export interface Todo {
   done: boolean;
 }
 
-const initialState: Todo[] = [
-  // {
-  //   id: new Date().getTime(),
-  //   description: 'Dentist Appoinment',
-  //   done: false,
-  // },
-  // {
-  //   id: new Date().getTime() * 3,
-  //   description: 'Buy bread',
-  //   done: false,
-  // },
-];
+// const initialState: Todo[] = [];
 
-const init = (): Todo[] => {
-  const todosString = localStorage.getItem('todos');
-  return todosString ? JSON.parse(todosString) : [];
-};
+// const init = (): Todo[] => {
+//   const todosString = localStorage.getItem('todos');
+//   return todosString ? JSON.parse(todosString) : [];
+// };
 
 export const TodoApp = () => {
-  const [todos, dispatch] = useReducer(todoReducer, initialState, init);
-
-  useEffect(() => {
-    localStorage.setItem('todos', JSON.stringify(todos));
-  }, [todos]);
-
-  const handleNewTodo = (todo: Todo) => {
-    const action: TodoAction = {
-      type: '[TODO] Add Todo',
-      payload: todo,
-    };
-
-    dispatch(action);
-  };
-
-  const handleDeleteTodo = (id: number) => {
-    dispatch({
-      type: '[TODO] Remove Todo',
-      payload: id,
-    });
-  };
-
-  const handleOnToggleTodo = (id: number) => {
-    dispatch({
-      type: '[TODO] Toggle Todo',
-      payload: id,
-    });
-    console.log({ id });
-  };
+  const {
+    todos,
+    allTodosCount,
+    pendingTodosCount,
+    handleNewTodo,
+    handleDeleteTodo,
+    handleOnToggleTodo,
+  } = useTodos();
 
   return (
     <>
       <h1>
-        TodoApp:10, <small>pending:2 </small>
+        TodoApp:{allTodosCount}, <small>pending:{pendingTodosCount} </small>
       </h1>
 
       <hr />
